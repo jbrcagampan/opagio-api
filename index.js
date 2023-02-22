@@ -5,10 +5,8 @@ require("./models/leads/leads.model.schema");
 var config = require("./config/config");
 
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
-const app = express();
-app.use(express.json());
+var app = express();
 app.use(cors());
-app.options("*", cors());
 app.use(require("./models/leads/leads.router"));
 app.listen(5000, () => {
   console.log("Server has started!");
