@@ -37,3 +37,7 @@ exports.getLeadStats = function (req, res, next) {
     }
   );
 };
+
+exports.test = function (req, res, next) {
+  return res.status(200).json({message: 'test'});
+};
