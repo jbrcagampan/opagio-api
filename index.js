@@ -4,14 +4,19 @@ var cors = require("cors");
 require("./models/leads/leads.model.schema");
 var config = require("./config/config");
 
-mongoose.connect(config.mongodb, { useNewUrlParser: true }).then(() => {
-  const app = express();
-  app.use(express.json());
-  app.use(cors());
-  app.options("*", cors());
-  app.use(require("./models/leads/leads.router"));
-  app.listen(5000, () => {
-    console.log("Server has started!");
+const dbConnect = async (app) => {
+
+  mongoose.connect(config.mongodb, { useNewUrlParser: true }).then(() => {
+    const app = express();
+    app.use(express.json());
+    app.use(cors());
+    app.options("*", cors());
+    app.use(require("./models/leads/leads.router"));
+    app.listen(5000, () => {
+      console.log("Server has started!");
+    });
+    return app;
   });
-  module.exports = app;
-});
+}
+
+module.exports = dbConnect();
