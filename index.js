@@ -8,6 +8,7 @@ mongoose.connect(config.mongodb, { useNewUrlParser: true }).then(() => {
   console.log('Connected to DB!')
 })
 var app = express();
+app.use(express.json());
 app.use(cors());
 app.use(require("./models/leads/leads.router"));
 app.listen(5000, () => {
